@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Salam, admin!</h1>
+    <p>Start with bismillah</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card" style="background-color: #E6EAF0; border: 1px solid #DAE3F2; border-radius: 20px; padding: 20px;">
+            <div class="card-body">
+                <h5 class="card-title" style="color: #2E2E2E;">Total Inventory Value (RM)</h5>
+                <p class="card-text" style="color: #5a6a85;">@ViewBag.TotalInventoryValue</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="background-color: #E6EAF0; border: 1px solid #DAE3F2; border-radius: 20px; padding: 20px;">
+            <div class="card-body">
+                <h5 class="card-title" style="color: #2E2E2E;">Products in Stock</h5>
+                <p class="card-text" style="color: #5a6a85;">@ViewBag.ProductsInStock</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="background-color: #E6EAF0; border: 1px solid #DAE3F2; border-radius: 20px; padding: 20px;">
+            <div class="card-body">
+                <h5 class="card-title" style="color: #2E2E2E;">Low Stock Alerts</h5>
+                <p class="card-text" style="color: #5a6a85;">@ViewBag.LowStockItems</p>
+                <a href="/Products" class="glass-button">View Products</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    
+    <form asp-action="/Products/Create" method="get" style="display:inline;">
+        <button type="submit" class="glass-button">Add New Item</button>
+    </form>
+
+    <form asp-action="/Purchases/Create" method="get" style="display:inline;">
+    <button type="submit" class="glass-button">Add New Purchase</button>
+    </form>
+</div>
+
+<div class="mt-4">
+    <h3>Recent Purchases</h3>
+    <table style="border-radius: 20px; overflow: hidden;">
+        <thead>
+            <tr>
+                <th>Purchase ID</th>
+                <th>Product Name</th>
+                <th>Purchased Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Purchased Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.RecentPurchases != null)
+            {
+                @foreach (var purchase in ViewBag.RecentPurchases)
+                {
+                    <tr>
+                        <td>@purchase.PurchaseID</td>
+                        <td>@purchase.ProductName</td>
+                        <td>@purchase.PurchasedPrice</td>
+                        <td>@purchase.Quantity</td>
+                        <td>@purchase.TotalPrice</td>
+                        <td>@purchase.PurchasedDate.ToString("yyyy-MM-dd")</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

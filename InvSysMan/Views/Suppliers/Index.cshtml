@@ -1,0 +1,31 @@
+﻿@model IEnumerable<InvSysMan.Models.Supplier>
+
+<h2>Supplier List</h2>
+<table class="glass-table">
+    <thead>
+        <tr>
+            <th>Supplier Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var supplier in Model)
+        {
+                <tr>
+                    <td>@supplier.SupplierName</td>
+                    <td>@supplier.Phone</td>
+                    <td>@supplier.Email</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@supplier.SupplierID">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@supplier.SupplierID">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="Create" method="get" style="display:inline;">
+    <button type="submit" class="glass-button">Add New Supplier</button>
+</form>
